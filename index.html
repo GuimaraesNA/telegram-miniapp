@@ -2,23 +2,70 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Controle de Estoque</title>
 
   <!-- API oficial do Telegram -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
+  <!-- Fonte moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <div class="container">
-    <h2>📦 Controle de Estoque</h2>
-    
-    <button id="btn-saldo">
-      📊 Ver Saldo
-    </button>
+  <header class="app-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="logo">📦</div>
+        <div class="brand-text">
+          <div class="app-name">Controle de Estoque</div>
+          <div class="app-sub">Gestão rápida em seu Telegram Mini App</div>
+        </div>
+      </div>
+      <div class="header-action">
+        <button id="btn-saldo" class="btn-primary-compact">📊 Ver Saldo</button>
+      </div>
+    </div>
+  </header>
 
-    <div id="inventory" style="margin-top:20px"></div>
+  <main class="container">
+    <div id="inventory" style="margin-top:12px"></div>
+  </main>
+
+  <!-- Modal móvel para seleção de depósito -->
+  <div id="deposit-modal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <h3 id="modal-title">Selecione o depósito</h3>
+      <select id="deposit-select">
+        <option value="">-- Escolha um depósito --</option>
+        <option value="1">Depósito 1</option>
+        <option value="2">Depósito 2</option>
+        <option value="3">Depósito 3</option>
+      </select>
+
+      <div class="modal-actions">
+        <button id="modal-cancel" class="btn-secondary">Cancelar</button>
+        <button id="modal-ok" class="btn-primary">Consultar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para ajustar saldo de um item -->
+  <div id="adjust-modal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop" id="adjust-backdrop"></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="adjust-title">
+      <h3 id="adjust-title">Ajustar saldo</h3>
+      <div id="adjust-item-name" style="margin-bottom:8px; font-weight:600;"></div>
+      <label for="adjust-amount">Quantidade (use números positivos para adicionar)</label>
+      <input id="adjust-amount" type="number" step="1" value="1" />
+
+      <div class="modal-actions">
+        <button id="adjust-cancel" class="btn-secondary">Cancelar</button>
+        <button id="adjust-save" class="btn-primary">Salvar</button>
+      </div>
+    </div>
   </div>
 
   <script src="js/app.js"></script>
